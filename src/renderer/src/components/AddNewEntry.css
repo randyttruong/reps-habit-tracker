@@ -1,0 +1,178 @@
+@keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.second-header {  
+    font-size: 32px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+form, form * { 
+
+  font-size: 3rem;
+  font-weight: 600;
+  font-style: italic;
+}
+form:focus, form:active, 
+
+form *:focus, form*:active { 
+  font-size: 3rem;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.habit-input { 
+  border-radius: 3px; 
+  border: 1px; 
+  height: 42px;
+  font-size: 32px;
+  font-style: normal;
+}
+
+.habit-input::placeholder { 
+  font-size: 32px;
+  font-style: italic; 
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.habit-input:focus { 
+  outline: none;
+  font-weight: 600;
+}
+
+.pop-up-menu-header { 
+    font-size: 3rem;
+    font-weight: 700;
+    width: 300px 600px;
+}
+
+.rep-input {  
+  width: 100px;
+  height: 50px;
+  font-size: 32px;
+  font-weight: 600;
+  border-width: 0px;
+  background-color: #ededed;
+  padding: 12px;
+  border-radius: 5px;
+  font-style: normal;
+}
+
+.rep-input:focus {  
+  outline-color:rgba(0, 0, 0, 0.1);
+}
+
+.inc-button {  
+  width: 50px;
+  height: 50px;
+  font-size: 32px;
+  font-weight: 600;
+  border-width: 0px;
+  text-align: center;
+  font-weight: 400;
+  border-radius: 5px;
+  background-color: white; 
+  background-color:rgba(0, 0, 0, 0.1);
+
+  margin-left: 5px;
+}
+
+.error-message-container { 
+    margin-top: 20px;
+    color: #bf0000;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.pop-up-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.25s ease-in forwards;
+  }
+  
+  .pop-up-menu {
+    background: white;
+    width: 300px 600px;
+    height: 200px 400px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.25s ease-in forwards;
+  }
+
+.form-container { 
+  display: flex; 
+  flex-direction: column;
+
+}
+  
+.pop-up-menu { 
+    font-size: 2rem;
+}
+
+.pop-up-menu-content { 
+    width: 100%;
+}
+
+.button-container { 
+    margin-top: 20px;
+}
+.new-habit-button { 
+  position: fixed; 
+  right: 20px;
+  bottom: 20px;
+  border-radius: 100%;
+
+  width: 75px;
+  height: 75px;
+  font-size: 55px;
+  color: white; 
+  border-width: 0px;
+
+  background: -webkit-linear-gradient(315deg, #087ea4 55%, #7c93ee);
+  overflow: hidden;
+}
+
+.new-habit-button:hover {
+  background: -webkit-linear-gradient(315deg, #065a7c 55%, #5a72bb);
+}
+
+.new-habit-button:focus {  
+  outline: none;
+}
+
+.reps-container { 
+  margin-top: 20px;
+}
