@@ -9,7 +9,11 @@ This is **Reps**, a free habit-tracking application built using *electron*. This
 - [ ] Reps logging 
 - [ ] Daily Habit completion animation  
 - [ ] Individual habit deletion 
-- [ ] Dynamic habit entry changing 
+- [ ] Dynamic entry editing
+  - [ ] Habit Name
+  - [ ] Repetitions
+  - [ ] Category
+  - [ ] etc.  
 
 ## Stretches 
 - [ ] Habit categories 
