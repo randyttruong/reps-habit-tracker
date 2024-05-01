@@ -15,5 +15,6 @@ This is **Reps**, a free habit-tracking application built using *electron*. This
 - [ ] Habit categories 
 - [ ] Notifications 
 - [ ] Habit tracking on a weekly/monthly basis 
-- [ ] Performance tracking 
+- [ ] Performance tracking
+- [ ] _Maybe move to Tauri in order to boost performance?_
 
