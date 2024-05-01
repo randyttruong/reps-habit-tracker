@@ -1,4 +1,4 @@
-# reps-habit-tracker
+# Reps 
 This is **Reps**, a free habit-tracking application built using *electron*. This is juat an application that is meant to help you keep track of your daily habits, as well as log them, as well as compare your performance over a daily, monthly, and yearly basis. 
 
 ## Core Functionality 
