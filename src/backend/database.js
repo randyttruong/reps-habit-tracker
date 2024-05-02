@@ -13,7 +13,7 @@ let db = new sqlite.Database('test.db', (err) => {
 
 function setupDatabase() {
   return new Promise((resolve, reject) => {
-    const initQuery = `CREATE TABLE IF NOT EXISTS habits (id INTEGER PRIMARY KEY, habitName TEXT, numReps INTEGER)`
+    const initQuery = `CREATE TABLE IF NOT EXISTS habits (id INTEGER PRIMARY KEY, habitName TEXT, numReps INTEGER, currReps INTEGER);`
     db.run(initQuery, (err) => {
       if (err) {
         console.error('Error creating table', err.message)

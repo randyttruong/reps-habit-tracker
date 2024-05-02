@@ -56,6 +56,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
+  setupDatabase()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

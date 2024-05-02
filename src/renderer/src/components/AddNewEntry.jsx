@@ -46,9 +46,9 @@ function PopUpMenu(props) {
       setErrorMessage('Invalid input. Please enter a valid habit name and number of reps.')
     } else {
       setErrorMessage('')
-      const query = `INSERT INTO habits (habitName, numReps) VALUES (? , ?)`
-      const query2 = `SELECT * from habits `
-      const params = [formData.habitName, numReps]
+      const query = `INSERT INTO habits (habitName, numReps, currReps) VALUES (?, ?, ?)`
+      const query2 = `SELECT * from habits`
+      const params = [formData.habitName, numReps, 0]
 
       const resp = await window.electronAPI.ipcRenderer.invoke('run-query', query, params)
       const resp2 = await window.electronAPI.ipcRenderer.invoke('get-all', query2)
@@ -56,8 +56,8 @@ function PopUpMenu(props) {
 
       console.log("successful submission");
 
-      // console.log(JSON.stringify(resp));
-      // console.log(resp2);
+      console.log(JSON.stringify(resp));
+      console.log(resp2);
 
       setFormData({ habitName: '', numReps: 0 })
       onClose()
