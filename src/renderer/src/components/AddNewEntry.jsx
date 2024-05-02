@@ -1,5 +1,6 @@
 import { React, useState, useContext } from 'react'
 import "./AddNewEntry.css"
+import useFormHooks from '../hooks/useFormHooks'
 
 /*
  * AddNewEntry.jsx
@@ -30,12 +31,21 @@ function verifySub(name, reps) {
 function PopUpMenu(props) {
   const { isOpen, onClose, setDataFn, children } = props
 
-  const [formData, setFormData] = useState({
+  const initialFormData = { 
     habitName: '',
     numReps: 0
-  })
+  };
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const { 
+    formData, 
+    setFormData, 
+    errorMessage, 
+    setErrorMessage, 
+    handleNameChange, 
+    handleIncrement, 
+    handleDecrement, 
+    handleClose 
+  } = useFormHooks(initialFormData, onClose);
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -54,42 +64,14 @@ function PopUpMenu(props) {
       const resp2 = await window.electronAPI.ipcRenderer.invoke('get-all', query2)
       setDataFn(resp2)
 
-      console.log("successful submission");
-
-      console.log(JSON.stringify(resp));
-      console.log(resp2);
+      // console.log("successful submission");
+      // console.log(JSON.stringify(resp));
+      // console.log(resp2);
 
       setFormData({ habitName: '', numReps: 0 })
       onClose()
     }
   }
-
-  const handleNameChange = (event) => {
-    setFormData({ habitName: event.target.value, numReps: formData.numReps })
-    console.log(event.target.value)
-  }
-
-  const handleRepChange = (event) => {
-    setFormData({ habitName: formData.habitName, numReps: parseInt(event.target.value) })
-    console.log(event.target.value)
-  }
-  const handleIncrement = () => {
-    setFormData({ ...formData, numReps: formData.numReps + 1 });
-  }
-
-  const handleDecrement = () => {
-    if (formData.numReps > 0) {
-      setFormData({ ...formData, numReps: formData.numReps - 1 });
-    }
-  }
-
-  const handleClose = () => { 
-    onClose()
-    setFormData({ habitName: '', numReps: 0 })
-    setErrorMessage('')
-  }
-
-
 
   if (!isOpen) {
     return <></>

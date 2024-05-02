@@ -2,19 +2,26 @@ import React, { useContext, useEffect, useState } from 'react'
 import { json } from 'react-router-dom'
 import { AddNewEntry } from '../components/AddNewEntry'
 import './MainPage.css'
+import useRowButtonHandlers from '../hooks/useRowButtonHandlers'
+import useMainPageHooks from '../hooks/useMainPageHooks'
 
+/* 
+ * Row()
+ * This is a component that represents a row in the table.
+ * 
+ * It contains the following data: 
+ * - isHeader: a boolean that determines if the row is a header or not1.
+ * - name: the name of the habit.
+ * - reps: the number of reps the user is supposed to do.
+ * - currReps: the number of reps the user has done today.
+ * - entry: the id of the habit.
+ */
 function Row(props) {
   const { isHeader, name, reps, currReps, entry, setData } = props
 
-  const [deleteToggle, setDeleteToggle] = useState(false); 
+  const { handleIncrement } = useRowButtonHandlers(props)
 
-  const handleIncrement = async () => {
-    const incQuery = `update habits set currReps = currReps + 1 where id = ${entry}`
-    const results1 = await window.electronAPI.ipcRenderer.invoke('run-query', incQuery)
-    const query = `select * from habits`
-    const results = await window.electronAPI.ipcRenderer.invoke('get-all', query)
-    setData(results)
-  } 
+  const [deleteToggle, setDeleteToggle] = useState(false); 
 
   const showDelete = async ()  => {  
     setDeleteToggle(!deleteToggle) 
@@ -50,17 +57,14 @@ function Row(props) {
   )
 } 
 
-// I want three columns
-// HabitName | Category | Description  HowOften | How many times I've done it today
-// Base Functionaltiy: HabitName | How Many Times I've Done Today | How Often
-//
-// Workflow:
-// Render the current habits that I have
-// - Probably makes sense to save it into a file (probably in JSON format)
-//
-
+/* 
+ * MainPage()
+ * This is the main page of the application. It will display all of the user's habits. 
+ */ 
 export function MainPage() {
-  const [data, setData] = useState(null)
+  const initialData = null; 
+
+  const { data, setData, handleRefresh, handleReset } = useMainPageHooks(initialData)
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -70,18 +74,6 @@ export function MainPage() {
     }
     getInitialData()
   }, [])
-
-  const handleRefresh = async () => {
-    const query = `select * from habits`
-    const results = await window.electronAPI.ipcRenderer.invoke('get-all', query)
-    setData(results)
-  }
-
-  const handleReset = async () => {
-    const query = `delete from habits`
-    const results = await window.electronAPI.ipcRenderer.invoke('run-query', query)
-    setData(results)
-  }
 
   return (
     <>

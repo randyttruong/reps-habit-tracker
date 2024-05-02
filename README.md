@@ -6,7 +6,7 @@ This is **Reps**, a free habit-tracking application built using *electron*. This
 - [X] Ability to create habits 
 - [X] Ability to reset database 
 - [X] Habit rendering 
-- [ ] Reps logging 
+- [X] Reps logging 
 - [ ] Daily Habit completion animation  
 - [ ] Individual habit deletion 
 - [ ] Dynamic entry editing
