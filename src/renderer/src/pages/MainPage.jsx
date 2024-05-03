@@ -4,12 +4,13 @@ import { AddNewEntry } from '../components/AddNewEntry'
 import './MainPage.css'
 import useRowButtonHandlers from '../hooks/useRowButtonHandlers'
 import useMainPageHooks from '../hooks/useMainPageHooks'
+import { monthNames, dayNames } from './Dates'
 
-/* 
+/*
  * Row()
  * This is a component that represents a row in the table.
- * 
- * It contains the following data: 
+ *
+ * It contains the following data:
  * - isHeader: a boolean that determines if the row is a header or not1.
  * - name: the name of the habit.
  * - reps: the number of reps the user is supposed to do.
@@ -19,12 +20,14 @@ import useMainPageHooks from '../hooks/useMainPageHooks'
 function Row(props) {
   const { isHeader, name, reps, currReps, entry, setData } = props
 
-  const { handleIncrement } = useRowButtonHandlers(props)
+  const { handleIncrement, formVars, setFormVars } = useRowButtonHandlers(props);
 
-  const [deleteToggle, setDeleteToggle] = useState(false); 
+  const [deleteToggle, setDeleteToggle] = useState(false);
 
-  const showDelete = async ()  => {  
-    setDeleteToggle(!deleteToggle) 
+  const [toggleForm, setToggleForm] = useState(false);
+
+  const showDelete = async () => {
+    setDeleteToggle(!deleteToggle)
   }
 
   return isHeader === true ? (
@@ -55,16 +58,28 @@ function Row(props) {
       </div>
     </div>
   )
-} 
+}
 
-/* 
+function fancyDay(numDay) {
+  const stringify = `${numDay}`;
+  const finalDay = stringify[stringify.length - 1];
+
+  if (finalDay === "1") return `${stringify}st`
+  if (finalDay === "2") return `${stringify}nd`
+  if (finalDay === "3") return `${stringify}rd`
+  else return `${stringify}th`
+}
+
+/*
  * MainPage()
- * This is the main page of the application. It will display all of the user's habits. 
- */ 
+ * This is the main page of the application. It will display all of the user's habits.
+ */
 export function MainPage() {
-  const initialData = null; 
+  const initialData = null;
 
   const { data, setData, handleRefresh, handleReset } = useMainPageHooks(initialData)
+
+  const [currDate, setCurrDate] = useState(new Date());
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -82,6 +97,9 @@ export function MainPage() {
           <p className={'header'}>
             Welcome Back to <span className="react">Reps</span>!
           </p>
+
+          <p className={'header'}>
+            Today is <span className='react'>{dayNames[currDate.getDay()]} </span> ,  {monthNames[currDate.getMonth()]} {fancyDay(currDate.getDate())} </p>
         </div>
         <div className={'grid-container'}>
           {data && data.length > 0 ? (
@@ -91,14 +109,14 @@ export function MainPage() {
           )}
           {data && data.length > 0 ? (
             data.map((row, key) => {
-              return <Row key={key} 
-                        isHeader={false} 
-                        name={row.habitName} 
-                        reps={row.numReps} 
-                        currReps={row.currReps}
-                        entry={row.id}
-                        setData={setData}
-                        />
+              return <Row key={key}
+                isHeader={false}
+                name={row.habitName}
+                reps={row.numReps}
+                currReps={row.currReps}
+                entry={row.id}
+                setData={setData}
+              />
             })
           ) : (
             <p>
